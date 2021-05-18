@@ -1,4 +1,4 @@
 import glob
 
-all_LMZ = glob.glob('C:/Users/junsu/PE2_Project-1/**/*LMZ*.xml',
+all_LMZ = glob.glob('C:/Users/junsu/Desktop/**/*LMZ*.xml',
                         recursive = True)
