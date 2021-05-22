@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from filter import *
+import os
 
 b=[]
 for i in range(0,len(all_LMZ)):
@@ -47,10 +48,13 @@ df = pd.DataFrame(np.array(b),columns=['Lot','Wafer','Mask',
                                        "Rsq of Ref.spectrum(6th)","Max transmission of Ref spec(dB)",
                                        "Rsq of IV","I at -1V[A]","I at 1V[A]"])
 
-df.to_csv("pandas.csv",mode="w")
+df.to_csv("Analysis_B1.csv",mode="w")
+os.mkdir("C:/Users/junsu/PE2_Project-1/images")
 # ------------------------------------------------------------------------------
 for i in range(0,len(all_LMZ)):
     plot.plot(all_LMZ[i])
-    plt.savefig("C:/Users/junsu/PE2_Project-1/사진/Analysis_{}_({},{}).png"
+    plt.savefig("C:/Users/junsu/PE2_Project-1/images/Analysis_{}_({},{}).png"
                 .format(info.TestSiteInfo(all_LMZ[i],"Wafer"),info.TestSiteInfo(all_LMZ[i],"DieRow"),info.TestSiteInfo(all_LMZ[i],"DieColumn")))
 # C:/Users/junsu/PE2_Project-1/사진
+#
+#
