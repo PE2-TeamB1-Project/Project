@@ -55,6 +55,6 @@ for i in range(0,len(all_LMZ)):
     plot.plot(all_LMZ[i])
     plt.savefig("C:/Users/junsu/PE2_Project-1/images/Analysis_{}_({},{}).png"
                 .format(info.TestSiteInfo(all_LMZ[i],"Wafer"),info.TestSiteInfo(all_LMZ[i],"DieRow"),info.TestSiteInfo(all_LMZ[i],"DieColumn")))
-# C:/Users/junsu/PE2_Project-1/사진
+# C:/Users/junsu/PE2_Project-1/images
 #
 #
