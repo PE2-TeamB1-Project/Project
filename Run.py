@@ -1,4 +1,14 @@
-import project as ifm
+import testsiteinfo as info
+import name
+import date
+import error
+import wavelength as wave
+import rsq_ref as ref
+import rsq_fit as fit
+import transmission as tms
+import I_one
+import I_none
+import plot
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,26 +16,26 @@ from filter import *
 
 b=[]
 for i in range(0,len(all_LMZ)):
-     a = [ifm.TestSiteInfo(all_LMZ[i],"Batch"),
-          ifm.TestSiteInfo(all_LMZ[i],"Wafer"),
-          ifm.TestSiteInfo(all_LMZ[i],"Maskset"),
-          ifm.TestSiteInfo(all_LMZ[i],"TestSite"),
-          ifm.Name(all_LMZ[i]),
-          ifm.Date(all_LMZ[i]),
+     a = [info.TestSiteInfo(all_LMZ[i],"Batch"),
+          info.TestSiteInfo(all_LMZ[i],"Wafer"),
+          info.TestSiteInfo(all_LMZ[i],"Maskset"),
+          info.TestSiteInfo(all_LMZ[i],"TestSite"),
+          name.Name(all_LMZ[i]),
+          date.Date(all_LMZ[i]),
           "process LMZ",
           "0.1",
           "B1",
           "B1 team member",
-          ifm.TestSiteInfo(all_LMZ[i],"DieRow"),
-          ifm.TestSiteInfo(all_LMZ[i],"DieColumn"),
-          ifm.ErrorFlag(all_LMZ[i]),
-          ifm.Errorcheck(all_LMZ[i]),
-          ifm.Wavelength(all_LMZ[i]),
-          ifm.Rsq_Ref(all_LMZ[i]),
-          ifm.transmission(all_LMZ[i]),
-          ifm.Rsq_fit(all_LMZ[i]),
-          ifm.negative1(all_LMZ[i]),
-          ifm.positive1(all_LMZ[i])]
+          info.TestSiteInfo(all_LMZ[i],"DieRow"),
+          info.TestSiteInfo(all_LMZ[i],"DieColumn"),
+          error.ErrorFlag(all_LMZ[i]),
+          error.Errorcheck(all_LMZ[i]),
+          wave.Wavelength(all_LMZ[i]),
+          ref.Rsq_Ref(all_LMZ[i]),
+          tms.transmission(all_LMZ[i]),
+          fit.Rsq_fit(all_LMZ[i]),
+          I_none.negative1(all_LMZ[i]),
+          I_one.positive1(all_LMZ[i])]
      b.append(a)
 
 
@@ -40,5 +50,5 @@ df = pd.DataFrame(np.array(b),columns=['Lot','Wafer','Mask',
 df.to_csv("pandas.csv",mode="w")
 # ------------------------------------------------------------------------------
 for i in range(0,len(all_LMZ)):
-    ifm.plot(all_LMZ[i])
-    plt.savefig("C:/Users/junsu/PE2_Project-1/사진/Analysis_{}_({},{}).png".format(ifm.TestSiteInfo(all_LMZ[i],"Wafer"),ifm.TestSiteInfo(all_LMZ[i],"DieRow"),ifm.TestSiteInfo(all_LMZ[i],"DieColumn")))
+    plot.plot(all_LMZ[i])
+    plt.savefig("C:/Users/junsu/PE2_Project-1/사진/Analysis_{}_({},{}).png".format(info.TestSiteInfo(all_LMZ[i],"Wafer"),info.TestSiteInfo(all_LMZ[i],"DieRow"),info.TestSiteInfo(all_LMZ[i],"DieColumn")))
