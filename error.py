@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import numpy as np
 
 def polyfitT(x, y, degree):
     coeffs = np.polyfit(x, y, degree)

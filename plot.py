@@ -6,7 +6,7 @@ import numpy as np
 def plot(x):
     tree = ET.parse(x)
     grid = (10, 15)
-    plt.figure(figsize=(16, 10))
+    plt.figure(figsize=(12, 8))
     plt.subplot2grid(grid, (0, 0), rowspan=4, colspan=4)
 
     for i in range(1, 7):
@@ -53,10 +53,11 @@ def plot(x):
         results = ssreg / sstot
         return results
 
-    for i in range(2, 9):
+    for i in range(4, 7):
         polyfiti = np.polyfit(L_list_7, IL_list_7, i)
         fiti = np.poly1d(polyfiti)
-        plt.plot(L_list_7, fiti(L_list_7), label="{}th R^2 = {}".format(i, polyfitT(L_list_7, IL_list_7, i)))
+        x = polyfitT(L_list_7, IL_list_7, i)
+        plt.plot(L_list_7, fiti(L_list_7), label="{}th R^2 = {}".format(i, '%0.5f'% x))
     plt.legend(loc="best")
     plt.title("Reference fitting")
     plt.xlabel('Wavelength [nm]')
@@ -125,7 +126,7 @@ def plot(x):
     sstot = np.sum((y_list_1 - ybar) ** 2)
     results = ssreg / sstot
 
-    plt.plot(x_list, result.best_fit, 'b-', label='best fit R^2={}'.format(results))
+    plt.plot(x_list, result.best_fit, 'b-', label='best fit R^2={}'.format('%0.5f'% results))
     plt.xlabel('Voltage [V]')
     plt.ylabel('Current [A]')
     plt.title('IV-fitting')
