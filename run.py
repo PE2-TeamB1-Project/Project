@@ -49,11 +49,11 @@ df = pd.DataFrame(np.array(b),columns=['Lot','Wafer','Mask',
                                        "Rsq of IV","I at -1V[A]","I at 1V[A]"])
 
 df.to_csv("Analysis_B1.csv",mode="w")
-os.mkdir("C:/Users/junsu/PE2_Project-1/images")
+os.mkdir("C:/Users/dream/Desktop/수업자료/3-1학기/공프2/clone/images")
 # ------------------------------------------------------------------------------
 for i in range(0,len(all_LMZ)):
     plot.plot(all_LMZ[i])
-    plt.savefig("C:/Users/junsu/PE2_Project-1/images/Analysis_{}_({},{})_{}_{}.png"
+    plt.savefig("C:/Users/dream/Desktop/수업자료/3-1학기/공프2/clone/images/Analysis_{}_({},{})_{}_{}.png"
                 .format(info.TestSiteInfo(all_LMZ[i],"Wafer"),info.TestSiteInfo(all_LMZ[i],"DieRow")
                         ,info.TestSiteInfo(all_LMZ[i],"DieColumn"),info.TestSiteInfo(all_LMZ[i],"TestSite")[4:],date.Date(all_LMZ[i])))
 # C:/Users/junsu/Desktop/Project/images
