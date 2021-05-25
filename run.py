@@ -56,6 +56,7 @@ for i in range(0,len(all_LMZ)):
     plt.savefig("C:/Users/junsu/PE2_Project-1/images/Analysis_{}_({},{})_{}_{}.png"
                 .format(info.TestSiteInfo(all_LMZ[i],"Wafer"),info.TestSiteInfo(all_LMZ[i],"DieRow")
                         ,info.TestSiteInfo(all_LMZ[i],"DieColumn"),info.TestSiteInfo(all_LMZ[i],"TestSite")[4:],date.Date(all_LMZ[i])))
+     plt.close()
 # C:/Users/junsu/Desktop/Project/images
 #C:/Users/dream/Desktop/수업자료/3-1학기/공프2/PE_project
 #
