@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
-import numpy as np
+from fitting import *
 
-
+#This function is belonging to plot.py at junsu
 def plot(x):
     tree = ET.parse(x)
     grid = (10, 15)
@@ -34,30 +34,12 @@ def plot(x):
 
     plt.subplot2grid(grid, (0, 5), rowspan=4, colspan=4)
 
-    L = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep/L")
-    IL = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep/IL")
-    L_7 = L.text.split(",")
-    IL_7 = IL.text.split(",")
-    L_list_7 = list(map(float, L_7))
-    IL_list_7 = list(map(float, IL_7))
-    DBias = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep")
     plt.scatter(L_list_7, IL_list_7, s=15, label="reference", alpha=0.01, facecolor='none', edgecolor='r')
 
-    def polyfitT(x, y, degree):
-        coeffs = np.polyfit(x, y, degree)
-        p = np.poly1d(coeffs)
-        yhat = p(x)
-        ybar = np.sum(y) / len(y)
-        ssreg = np.sum((yhat - ybar) ** 2)
-        sstot = np.sum((y - ybar) ** 2)
-        results = ssreg / sstot
-        return results
-
-    for i in range(4, 7):
-        polyfiti = np.polyfit(L_list_7, IL_list_7, i)
-        fiti = np.poly1d(polyfiti)
-        x = polyfitT(L_list_7, IL_list_7, i)
-        plt.plot(L_list_7, fiti(L_list_7), label="{}th R^2 = {}".format(i, '%0.5f'% x))
+    polyfiti = np.polyfit(L_list_7, IL_list_7, 6)
+    fiti = np.poly1d(polyfiti)
+    x = polyfitT(L_list_7, IL_list_7, 6)
+    plt.plot(L_list_7, fiti(L_list_7), label="{}th R^2 = {}".format(6, '%0.5f'% x))
     plt.legend(loc="best")
     plt.title("Reference fitting")
     plt.xlabel('Wavelength [nm]')
@@ -78,13 +60,6 @@ def plot(x):
         DBias = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator/PortCombo/WavelengthSweep[{}]".format(i))
         plt.plot(L_list_i, IL_list_i - fit6(L_list_i), ".", label=DBias.get("DCBias"))
 
-    L = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep/L")
-    IL = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep/IL")
-    L_7 = L.text.split(",")
-    IL_7 = IL.text.split(",")
-    L_list_7 = list(map(float, L_7))
-    IL_list_7 = list(map(float, IL_7))
-    DBias = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator[2]/PortCombo/WavelengthSweep")
     plt.plot(L_list_7, IL_list_7 - fit6(L_list_7), ".",label = DBias.get("DCBias"))
     plt.legend(loc=(0, 0))
     plt.title("Transmission spectra - as processed")
@@ -92,7 +67,7 @@ def plot(x):
     plt.ylabel('flat Measured transmission [dB]')
 
     plt.subplot2grid(grid, (5, 0), rowspan=4, colspan=4)
-    from numpy import exp
+
     from lmfit import Model
 
     b = tree.find(".ElectroOpticalMeasurements/ModulatorSite/Modulator/PortCombo/IVMeasurement/Voltage")
@@ -111,14 +86,8 @@ def plot(x):
     plt.xlabel('Voltage [V]')
     plt.ylabel('Current [A]')
 
-    polyfiti = np.polyfit(x_list, y_list_1, 12)
-    fiti = np.poly1d(polyfiti)
-
-    def IVfittting(x, q, w, alp):
-        return abs(q * (exp(x / w) - 1)) + alp * fiti(x)
-
     gmodel = Model(IVfittting)
-    result = gmodel.fit(y_list_1, x=x_list, q=1, w=1, alp=1)
+    result = gmodel.fit(y_list_1, x=x_list, q=1, w=1, alp=1, xi = x_list, yi = y_list_1)
 
     yhat = result.best_fit
     ybar = np.sum(y_list_1) / len(y_list_1)
