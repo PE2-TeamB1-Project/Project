@@ -45,8 +45,7 @@ def make_csv ():
              i_none.negative1(all_LMZ[i]),
              i_one.positive1(all_LMZ[i])]
         if len(file_list) > 0:
-            a.append("""=HYPERLINK("./results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png",
-                    "Analysis_{0}_({1},{2})_{3}_{4}")""".format(
+            a.append("""=HYPERLINK("C:/Users/junsu/Desktop/Project/results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png")""".format(
                 TestSiteInfo(all_LMZ[i], "Wafer"),
                 TestSiteInfo(all_LMZ[i], "DieRow"),
                 TestSiteInfo(all_LMZ[i], "DieColumn"),
