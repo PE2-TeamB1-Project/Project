@@ -1,18 +1,11 @@
-from extract import *
-import error
-import rsq_ref as ref
-import rsq_fit as fit
-import i_one
-import i_none
-import plot
+from glob import glob
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from filter import *
 import os
 import warnings
 warnings.filterwarnings('ignore')
-from png_signal import *
+import module as mo
 
 def clear_png ():
     [os.remove(f) for f in glob.glob("../results/png_files/*")]
@@ -21,37 +14,37 @@ def clear_csv():
     [os.remove(f) for f in glob.glob("../results/csv_file/*")]
 
 def make_csv ():
-    search('./results/png_files/')
+    mo.search('./results/png_files/')
     b=[]
-    for i in range(0,len(all_LMZ)):
-        a = [TestSiteInfo(all_LMZ[i],"Batch"),
-             TestSiteInfo(all_LMZ[i],"Wafer"),
-             TestSiteInfo(all_LMZ[i],"Maskset"),
-             TestSiteInfo(all_LMZ[i],"TestSite"),
-             Name(all_LMZ[i]),
-              Date(all_LMZ[i]),
+    for i in range(0,len(mo.all_LMZ)):
+        a = [mo.TestSiteInfo(mo.all_LMZ[i],"Batch"),
+             mo.TestSiteInfo(mo.all_LMZ[i],"Wafer"),
+             mo.TestSiteInfo(mo.all_LMZ[i],"Maskset"),
+             mo.TestSiteInfo(mo.all_LMZ[i],"TestSite"),
+             mo.Name(mo.all_LMZ[i]),
+             mo.Date(mo.all_LMZ[i]),
              "process LMZ",
              "0.1",
              "B1",
              "B1 team member",
-             TestSiteInfo(all_LMZ[i],"DieRow"),
-             TestSiteInfo(all_LMZ[i],"DieColumn"),
-             error.ErrorFlag(all_LMZ[i]),
-             error.Errorcheck(all_LMZ[i]),
-             Wavelength(all_LMZ[i]),
-             ref.Rsq_Ref(all_LMZ[i]),
-             transmission(all_LMZ[i]),
-             fit.Rsq_fit(all_LMZ[i]),
-             i_none.negative1(all_LMZ[i]),
-             i_one.positive1(all_LMZ[i])]
-        if len(file_list) > 0:
+             mo.TestSiteInfo(mo.all_LMZ[i],"DieRow"),
+             mo.TestSiteInfo(mo.all_LMZ[i],"DieColumn"),
+             mo.ErrorFlag(mo.all_LMZ[i]),
+             mo.Errorcheck(mo.all_LMZ[i]),
+             mo.Wavelength(mo.all_LMZ[i]),
+             mo.Rsq_Ref(mo.all_LMZ[i]),
+             mo.transmission(mo.all_LMZ[i]),
+             mo.Rsq_fit(mo.all_LMZ[i]),
+             mo.negative1(mo.all_LMZ[i]),
+             mo.positive1(mo.all_LMZ[i])]
+        if len(mo.file_list) > 0:
             a.append("""=HYPERLINK("./results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png",
                     "Analysis_{0}_({1},{2})_{3}_{4}")""".format(
-                TestSiteInfo(all_LMZ[i], "Wafer"),
-                TestSiteInfo(all_LMZ[i], "DieRow"),
-                TestSiteInfo(all_LMZ[i], "DieColumn"),
-                TestSiteInfo(all_LMZ[i], 'TestSite'),
-                Date(all_LMZ[i])))
+                mo.TestSiteInfo(mo.all_LMZ[i], "Wafer"),
+                mo.TestSiteInfo(mo.all_LMZ[i], "DieRow"),
+                mo.TestSiteInfo(mo.all_LMZ[i], "DieColumn"),
+                mo.TestSiteInfo(mo.all_LMZ[i], 'TestSite'),
+                mo.Date(mo.all_LMZ[i])))
         else:
             a.append(['NaN'])
         b.append(a)
@@ -82,17 +75,17 @@ def make_csv ():
     df.to_csv("./results/csv_file/Analysis_B1.csv",mode="w")
 # ------------------------------------------------------------------------------
 def make_png ():
-    for i in range(0,len(all_LMZ)):
-        plot.plot(all_LMZ[i])
+    for i in range(0,len(mo.all_LMZ)):
+        mo.plot(mo.all_LMZ[i])
         plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}.png"
-                .format(TestSiteInfo(all_LMZ[i],"Wafer"),
-                        TestSiteInfo(all_LMZ[i],"DieRow"),
-                        TestSiteInfo(all_LMZ[i],"DieColumn"),
-                        TestSiteInfo(all_LMZ[i],'TestSite'),
-                        Date(all_LMZ[i])))
+                .format(mo.TestSiteInfo(mo.all_LMZ[i],"Wafer"),
+                        mo.TestSiteInfo(mo.all_LMZ[i],"DieRow"),
+                        mo.TestSiteInfo(mo.all_LMZ[i],"DieColumn"),
+                        mo.TestSiteInfo(mo.all_LMZ[i],'TestSite'),
+                        mo.Date(mo.all_LMZ[i])))
         plt.close()
 
 
 # C:/Users/junsu/PE2_Project-1/사진
 # C:/Users/ps311/Programming/PycharmProjects/PE2_WorkingSP/Results/PNG_files
-#
+# C:/Users/dream/Desktop/수업자료/3-1학기/공프2/hatefinal

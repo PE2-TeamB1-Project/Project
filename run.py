@@ -1,4 +1,3 @@
-import option
+import module as mo
 
-option
-
+mo.option

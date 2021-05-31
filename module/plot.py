@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
-from fitting import *
+import module as mo
+import numpy as np
 
 #This function is belonging to plot.py at junsu
 def plot(x):
@@ -38,7 +39,7 @@ def plot(x):
 
     polyfiti = np.polyfit(L_list_7, IL_list_7, 6)
     fiti = np.poly1d(polyfiti)
-    x = polyfitT(L_list_7, IL_list_7, 6)
+    x = mo.polyfitT(L_list_7, IL_list_7, 6)
     plt.plot(L_list_7, fiti(L_list_7), label="{}th R^2 = {}".format(6, '%0.5f'% x))
     plt.legend(loc="best")
     plt.title("Reference fitting")
@@ -86,7 +87,7 @@ def plot(x):
     plt.xlabel('Voltage [V]')
     plt.ylabel('Current [A]')
 
-    gmodel = Model(IVfittting)
+    gmodel = Model(mo.IVfittting)
     result = gmodel.fit(y_list_1, x=x_list, q=1, w=1, alp=1, xi = x_list, yi = y_list_1)
 
     yhat = result.best_fit
