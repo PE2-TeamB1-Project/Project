@@ -31,7 +31,7 @@ Analysing the data in xml files and show the contents to <u>csv file</u> and <u>
 + run.py : the last move button
 
 ## Example of analysis Result
-
++ Transmission spectra graph(as measured) & Reference fitting & flat Transmission spectra & IV-fitting
 <img src="./document/B1_1.png" width="400">
 <img src="./document/B1_2.png" width="400">
 <img src="./document/B1_3.png" width="400">
