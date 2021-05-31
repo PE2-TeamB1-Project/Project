@@ -33,5 +33,7 @@ Analysing the data in xml files and show the contents to <u>csv file</u> and <u>
 ## Example of analysis Result
 + Transmission spectra graph(as measured) & Reference fitting & flat Transmission spectra & IV-fitting
 <img src="./document/B1_1.png" width="400">
++ Pictures of graphs in xml given by customer
 <img src="./document/B1_2.png" width="400">
++ Information in xml given by customer using csv file
 <img src="./document/B1_3.png" width="400">
