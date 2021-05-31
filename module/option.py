@@ -1,8 +1,6 @@
 import get_result as gr
 from get_result import *
 
-
-
 while True:
     a = input("---------------------------------------\n"
               "csv만 출력 1, png만 출력 2, csv와 png 출력 3\n"
@@ -12,7 +10,6 @@ while True:
               "나가기 7\n"
               "---------------------------------------\n"
               "명령어 입력창 : ")
-
 
     if a =="1":
         clear_csv()

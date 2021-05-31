@@ -9,17 +9,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from filter import *
-import os
+import shutil
 import warnings
 warnings.filterwarnings('ignore')
 from png_signal import *
 
 def clear_png ():
-    [os.remove(f) for f in glob.glob("../results/png_files/*")]
+    shutil.rmtree("./results/png_files")
+    os.mkdir("./results/png_files")
 
 def clear_csv():
-    [os.remove(f) for f in glob.glob("../results/csv_file/*")]
-
+    shutil.rmtree("./results/csv_file")
+    os.mkdir("./results/csv_file")
 def make_csv ():
     search('./results/png_files/')
     b=[]
@@ -45,7 +46,7 @@ def make_csv ():
              i_none.negative1(all_LMZ[i]),
              i_one.positive1(all_LMZ[i])]
         if len(file_list) > 0:
-            a.append("""=HYPERLINK("C:/Users/junsu/Desktop/Project/results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png")""".format(
+            a.append('=HYPERLINK("../results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png")'.format(
                 TestSiteInfo(all_LMZ[i], "Wafer"),
                 TestSiteInfo(all_LMZ[i], "DieRow"),
                 TestSiteInfo(all_LMZ[i], "DieColumn"),

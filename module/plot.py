@@ -6,7 +6,7 @@ from fitting import *
 def plot(x):
     tree = ET.parse(x)
     grid = (10, 15)
-    plt.figure(figsize=(8, 4))
+    plt.figure(figsize=(12, 8))
     plt.subplot2grid(grid, (0, 0), rowspan=4, colspan=4)
 
     for i in range(1, 7):
