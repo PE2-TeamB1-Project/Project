@@ -31,9 +31,13 @@ Analysing the data in xml files and show the contents to <u>csv file</u> and <u>
 + run.py : the last move button
 
 ## Example of analysis Result
-+ Transmission spectra graph(as measured) & Reference fitting & flat Transmission spectra & IV-fitting
++ Merged image(Transmission spectra graph(as measured) & Reference fitting & flat Transmission spectra & IV-fitting)
 <img src="./document/B1_1.png" width="400">
-+ Pictures of graphs in xml given by customer
+- stored Pictures of the merged image
 <img src="./document/B1_2.png" width="400">
-+ Information in xml given by customer using csv file
+- analysis contents dataframe by xml data
 <img src="./document/B1_3.png" width="400">
+
+## run.py: the last move button
+
+python script
