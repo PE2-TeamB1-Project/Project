@@ -1,4 +1,4 @@
-import module as mo
+import src
 
 
 
@@ -14,49 +14,49 @@ while True:
 
 
     if a =="1":
-        mo.clear_csv()
+        src.clear_csv()
         print()
         print('csv를 출력하는 중입니다.')
-        mo.make_csv()
+        src.make_csv()
         print()
         print('csv 출력이 완료되었습니다.')
         print()
 
     elif a=="2":
-        mo.clear_png()
+        src.clear_png()
         print()
         print('png를 출력하는 중입니다.')
-        mo.make_png()
+        src.make_png()
         print()
         print('png 출력을 완료하였습니다.')
         print()
 
     elif a =="3":
-        mo.clear_csv()
-        mo.clear_png()
+        src.clear_csv()
+        src.clear_png()
         print()
         print('csv와 png를 출력하는 중입니다.')
-        mo.make_png()
-        mo.make_csv() #png 다음 csv 순서 중요!!
+        src.make_png()
+        src.make_csv() #png 다음 csv 순서 중요!!
         print()
         print('csv와 png 출력을 완료하였습니다.')
         print()
 
     elif a=="4":
-        mo.clear_csv()
+        src.clear_csv()
         print()
         print('csv를 삭제했습니다.')
         print()
 
     elif a=="5":
-        mo.clear_png()
+        src.clear_png()
         print()
         print('png를 삭제했습니다.')
         print()
 
     elif a=="6":
-        mo.clear_csv()
-        mo.clear_png()
+        src.clear_csv()
+        src.clear_png()
         print()
         print('csv와 png를 삭제했습니다.')
         print()

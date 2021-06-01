@@ -1,3 +1,3 @@
-import module as mo
+import src
 
-mo.option
+src.option
