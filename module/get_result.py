@@ -1,3 +1,4 @@
+from glob import glob
 from extract import *
 import error
 import rsq_ref as ref
@@ -5,6 +6,7 @@ import rsq_fit as fit
 import i_one
 import i_none
 import plot
+import png_signal as ps
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,7 +14,6 @@ from filter import *
 import os
 import warnings
 warnings.filterwarnings('ignore')
-from png_signal import *
 
 def clear_png ():
     [os.remove(f) for f in glob.glob("../results/png_files/*")]
@@ -21,7 +22,7 @@ def clear_csv():
     [os.remove(f) for f in glob.glob("../results/csv_file/*")]
 
 def make_csv ():
-    search('./results/png_files/')
+    ps.search('./results/png_files/')
     b=[]
     for i in range(0,len(all_LMZ)):
         a = [TestSiteInfo(all_LMZ[i],"Batch"),
@@ -44,7 +45,7 @@ def make_csv ():
              fit.Rsq_fit(all_LMZ[i]),
              i_none.negative1(all_LMZ[i]),
              i_one.positive1(all_LMZ[i])]
-        if len(file_list) > 0:
+        if len(ps.file_list) > 0:
             a.append("""=HYPERLINK("./results/png_files/Analysis_{0}_({1},{2})_{3}_{4}.png",
                     "Analysis_{0}_({1},{2})_{3}_{4}")""".format(
                 TestSiteInfo(all_LMZ[i], "Wafer"),

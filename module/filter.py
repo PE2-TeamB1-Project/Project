@@ -1,4 +1,4 @@
 import glob
 
-all_LMZ = glob.glob(r'.\data\P184640\**\*LMZ*.xml',
+all_LMZ = glob.glob(r'.\P184640\**\*LMZ*.xml',
                     recursive = True)
