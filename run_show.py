@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QHBox
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QCoreApplication, Qt
 from functools import partial
+from get_result import *
 
 class MyApp(QWidget):
 
@@ -18,27 +19,46 @@ class MyApp(QWidget):
 
         Wafer_label = QLabel('Wafer',self)
         Wafer_label.move(30, 50)
-
-        Wafer_D07 = QCheckBox('D07',self)
-        Wafer_D07.move(30,80)
-        Wafer_D08 = QCheckBox('D08',self)
-        Wafer_D08.move(100,80)
-        Wafer_D23 = QCheckBox('D23',self)
-        Wafer_D23.move(170,80)
-        Wafer_D24 = QCheckBox('D24',self)
-        Wafer_D24.move(240,80)
+        self.Wafer = QComboBox(self)
+        self.Wafer.addItem('D07'), \
+        self.Wafer.addItem('D08'), \
+        self.Wafer.addItem('D23'), \
+        self.Wafer.addItem('D24'), \
+        self.Wafer.move(30, 80)
+        # Wafer_D07 = QCheckBox('D07',self)
+        # Wafer_D07.move(30,80)
+        # Wafer_D08 = QCheckBox('D08',self)
+        # Wafer_D08.move(100,80)
+        # Wafer_D23 = QCheckBox('D23',self)
+        # Wafer_D23.move(170,80)
+        # Wafer_D24 = QCheckBox('D24',self)
+        # Wafer_D24.move(240,80)
 
         Row_label = QLabel('Row : ',self)
         Row_label.move(30, 130)
-        Row = QComboBox(self)
-        Row.addItem('--'),Row.addItem('-4'), Row.addItem('-3'), Row.addItem('-2'), Row.addItem('-1'), Row.addItem('0'), Row.addItem('1'), Row.addItem('2'), Row.addItem('3'), Row.addItem('4'), Row.addItem('all')
-        Row.move(80,130)
+        self.Row = QComboBox(self)
+        self.Row.addItem('-4'), \
+        self.Row.addItem('-3'), \
+        self.Row.addItem('-2'), \
+        self.Row.addItem('-1'), \
+        self.Row.addItem('0'), \
+        self.Row.addItem('1'), \
+        self.Row.addItem('2'), \
+        self.Row.addItem('3'), \
+        self.Row.move(80,130)
 
         Col_label = QLabel('Column : ',self)
         Col_label.move(180, 130)
-        Col = QComboBox(self)
-        Col.addItem('--'),Col.addItem('-4'), Col.addItem('-3'), Col.addItem('-2'), Col.addItem('-1'), Col.addItem('0'), Col.addItem('1'), Col.addItem('2'), Col.addItem('3'), Col.addItem('4'), Col.addItem('all')
-        Col.move(250,130)
+        self.Col = QComboBox(self)
+        self.Col.addItem('-4'), \
+        self.Col.addItem('-3'), \
+        self.Col.addItem('-2'), \
+        self.Col.addItem('-1'), \
+        self.Col.addItem('0'), \
+        self.Col.addItem('1'), \
+        self.Col.addItem('2'), \
+        self.Col.addItem('3'), \
+        self.Col.move(250,130)
 
         self.IV_Check = QCheckBox('IV_graph(fitting)',self)
         self.IV_Check.move(30,180)
@@ -51,8 +71,13 @@ class MyApp(QWidget):
         self.all_Check = QCheckBox('all',self)
         self.all_Check.move(30,300)
 
-        btn1 = QPushButton('Plot',self)
-        btn1.move(50,350)
+        self.btn1 = QPushButton('Plot',self)
+        self.btn1.move(50,350)
+        self.btn1.clicked.connect(self.test2)
+
+        self.btn2 = QPushButton('check', self)
+        self.btn2.move(150, 350)
+        self.btn2.clicked.connect(self.test)
 
         btn = QPushButton('Quit', self)
         btn.move(250,350)
@@ -60,6 +85,14 @@ class MyApp(QWidget):
         btn.clicked.connect(QCoreApplication.instance().quit)
 
         self.all_Check.stateChanged.connect(self.turnoff4)
+
+    def test(self):
+
+        x = str(self.Col.currentText())
+        y = str(self.Row.currentText())
+        z = str(self.Wafer.currentText())
+        a=[z,y,x]
+        print(a)
 
     def turnoff4(self):
         if self.all_Check.isChecked():
@@ -72,6 +105,43 @@ class MyApp(QWidget):
             self.Ts2_Check.setEnabled(True)
             self.Ts1_Check.setEnabled(True)
             self.Rf_Check.setEnabled(True)
+
+    def test2(self):
+        x = str(self.Col.currentText())
+        y = str(self.Row.currentText())
+        z = str(self.Wafer.currentText())
+        a = [z, y, x]
+
+        if self.all_Check.isChecked() == True:
+            for i in range(0, len(all_LMZ)):
+                if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
+                        plot.plot(all_LMZ[i])
+                        plt.show()
+            # print(a, "all")
+        if self.IV_Check.isChecked() == True:
+            for i in range(0, len(all_LMZ)):
+                if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
+                        iv.iv(all_LMZ[i])
+                        plt.show()
+            # print(a, "IV_graph(fitting)")
+        if self.Ts1_Check.isChecked() == True:
+            for i in range(0, len(all_LMZ)):
+                if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
+                        tm.measured(all_LMZ[i])
+                        plt.show()
+            # print(a, "Transmission spectra(measured)")
+        if self.Ts2_Check.isChecked() == True:
+            for i in range(0, len(all_LMZ)):
+                if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
+                        tp.processed(all_LMZ[i])
+                        plt.show()
+            # print(a, "Transmission spectra(processed)")
+        if self.Rf_Check.isChecked() == True:
+            for i in range(0, len(all_LMZ)):
+                if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
+                        reference.reference(all_LMZ[i])
+                        plt.show()
+            # print(a, "Reference fitting")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

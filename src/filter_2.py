@@ -170,9 +170,16 @@ class MyApp(QWidget):
         self.btn2.clicked.connect(self.test2)
 
         self.btn3 = QPushButton('임시', self)
-        grid.addWidget(self.btn3, 8, 3)
+        grid.addWidget(self.btn3, 8, 2)
         self.btn3.resize(self.btn3.sizeHint())
-        self.btn3.clicked.connect(self.test)
+
+
+        self.btn4 = QPushButton('xlsx', self)
+        grid.addWidget(self.btn4, 8, 3)
+        self.btn4.resize(self.btn4.sizeHint())
+        self.btn4.clicked.connect(self.test3)
+
+
         # creating a check-able combo box object
         self.combo_box_row = CheckableComboBox1_1(self)
         self.combo_box_column = CheckableComboBox1_2(self)
@@ -224,7 +231,21 @@ class MyApp(QWidget):
             self.Ts1_Check.setEnabled(True)
             self.Rf_Check.setEnabled(True)
 
+    def test3(self):
+        clear_xlsx()
+        make_xlsx()
+
     def test2(self):
+
+        # print('Wafer : ' + str(checkedItems2) + ', ' + 'Row : ' + str(checkedItems1_1) + ', ' + 'Column : ' + str(checkedItems1_2))
+        # a = []
+        # for x in checkedItems2:
+        #     for y in checkedItems1_1:
+        #         for z in checkedItems1_2:
+        #             a.append([x, y, z])
+        # print(a)
+        # for w in a:
+        #     print(w)
 
         if self.PNG_all.isChecked() == True:
             a = []
@@ -243,7 +264,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            print(a, "all")
+            # print(a, "all")
         if self.IV_Check.isChecked() == True:
             b = []
             for x in checkedItems2:
@@ -261,7 +282,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            print(b, "IV_graph(fitting)")
+            # print(b, "IV_graph(fitting)")
         if self.Ts1_Check.isChecked() == True:
             c = []
             for x in checkedItems2:
@@ -279,7 +300,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            print(c, "Transmission spectra(measured)")
+            # print(c, "Transmission spectra(measured)")
         if self.Ts2_Check.isChecked() == True:
             d = []
             for x in checkedItems2:
@@ -297,7 +318,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            print(d, "Transmission spectra(processed)")
+            # print(d, "Transmission spectra(processed)")
         if self.Rf_Check.isChecked() == True:
             e = []
             for x in checkedItems2:
@@ -315,4 +336,4 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            print(e, "Reference fitting")
+            # print(e, "Reference fitting")
