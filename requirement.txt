@@ -1,0 +1,7 @@
+numpy
+pandas
+matplotlib
+xml.etree.ElementTree
+PyQt5
+openyxl
+lmfit
