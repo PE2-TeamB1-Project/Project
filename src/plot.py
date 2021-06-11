@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from fitting import *
 from filter import *
 
-#This function is belonging to plot.py at junsu
 def plot(x):
     tree = ET.parse(x)
     grid = (9, 9)
@@ -97,8 +96,6 @@ def plot(x):
     results = ssreg / sstot
 
     plt.plot(x_list, result.best_fit, 'b-', label='best fit R^2={}'.format('%0.5f'% results))
-    plt.xlabel('Voltage [V]')
-    plt.ylabel('Current [A]')
     plt.title('IV-fitting')
     plt.text(-1, result.best_fit[4], str(result.best_fit[4]), color='g', horizontalalignment='center',
              verticalalignment='bottom')

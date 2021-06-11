@@ -1,3 +1,5 @@
 ## Ignore file##
 .idea/
 __pycache__/
+data/
+results/

@@ -19,3 +19,4 @@ def reference(x):
     plt.title("Reference fitting")
     plt.xlabel('Wavelength [nm]')
     plt.ylabel('Measured transmission [dB]')
+

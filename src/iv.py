@@ -31,11 +31,10 @@ def iv(x):
     results = ssreg / sstot
 
     plt.plot(x_list, result.best_fit, 'b-', label='best fit R^2={}'.format(results))
-    plt.xlabel('Voltage [V]')
-    plt.ylabel('Current [A]')
-    plt.title('IV-fitting')
+
     plt.text(-1, result.best_fit[4], str(result.best_fit[4]), color='g', horizontalalignment='center',
              verticalalignment='bottom')
     plt.text(1, result.best_fit[12], str(result.best_fit[12]), color='g', horizontalalignment='center',
              verticalalignment='bottom')
+    plt.title('IV-fitting')
     plt.legend()

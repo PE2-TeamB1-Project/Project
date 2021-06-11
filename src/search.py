@@ -1,6 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QTextEdit, QComboBox
-from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QCoreApplication, Qt
 import iv
 import reference
@@ -10,7 +9,7 @@ from filter import *
 from get_result import *
 import plot
 
-class MyApp(QWidget):
+class MyApp_search(QDialog):
 
     def __init__(self):
         super().__init__()
@@ -76,18 +75,13 @@ class MyApp(QWidget):
         self.all_Check = QCheckBox('all',self)
         self.all_Check.move(30,300)
 
-        self.btn1 = QPushButton('Plot',self)
+        self.btn1 = QPushButton('Show',self)
         self.btn1.move(50,350)
         self.btn1.clicked.connect(self.test2)
 
-        self.btn2 = QPushButton('check', self)
+        self.btn2 = QPushButton('Check', self)
         self.btn2.move(150, 350)
         self.btn2.clicked.connect(self.test)
-
-        btn = QPushButton('Quit', self)
-        btn.move(250,350)
-        btn.resize(btn.sizeHint())
-        btn.clicked.connect(QCoreApplication.instance().quit)
 
         self.all_Check.stateChanged.connect(self.turnoff4)
 
@@ -120,35 +114,40 @@ class MyApp(QWidget):
         if self.all_Check.isChecked() == True:
             for i in range(0, len(all_LMZ)):
                 if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
-                        plot.plot(all_LMZ[i])
-                        plt.show()
+                    plot.plot(all_LMZ[i])
+                    plt.suptitle('Analysis_{}_({},{})_{}_{}'.format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                                    TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                                    TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                                    TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                                    Date(all_LMZ[i])))
+                    plt.show()
             # print(a, "all")
         if self.IV_Check.isChecked() == True:
             for i in range(0, len(all_LMZ)):
                 if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
-                        iv.iv(all_LMZ[i])
-                        plt.show()
+                    iv.iv(all_LMZ[i])
+                    plt.show()
             # print(a, "IV_graph(fitting)")
         if self.Ts1_Check.isChecked() == True:
             for i in range(0, len(all_LMZ)):
                 if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
-                        tm.measured(all_LMZ[i])
-                        plt.show()
+                    tm.measured(all_LMZ[i])
+                    plt.show()
             # print(a, "Transmission spectra(measured)")
         if self.Ts2_Check.isChecked() == True:
             for i in range(0, len(all_LMZ)):
                 if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
-                        tp.processed(all_LMZ[i])
-                        plt.show()
+                    tp.processed(all_LMZ[i])
+                    plt.show()
             # print(a, "Transmission spectra(processed)")
         if self.Rf_Check.isChecked() == True:
             for i in range(0, len(all_LMZ)):
                 if TestSiteInfo(all_LMZ[i], "Wafer") == a[0] and TestSiteInfo(all_LMZ[i], "DieRow") == a[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == a[2]:
-                        reference.reference(all_LMZ[i])
-                        plt.show()
+                    reference.reference(all_LMZ[i])
+                    plt.show()
             # print(a, "Reference fitting")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MyApp()
+    ex = MyApp_search()
     sys.exit(app.exec_())

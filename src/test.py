@@ -1,22 +1,10 @@
 from extract import *
-import error
-import rsq_ref as ref
-import rsq_fit as fit
-import i_one
-import i_none
-import plot
 import iv
-import reference
-import transmission_measured as tm
-import transmission_processed as tp
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from filter import *
-import shutil
 import warnings
 warnings.filterwarnings('ignore')
-from png_signal import *
+
 
 
 def test():

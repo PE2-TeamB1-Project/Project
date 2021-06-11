@@ -10,6 +10,7 @@ from get_result import *
 import plot
 import matplotlib.pyplot as plt
 from filter import *
+from search import MyApp_search
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -165,12 +166,12 @@ class MyApp(QWidget):
         grid.addWidget(self.Ts2_Check, 5, 0)
         self.Rf_Check = QCheckBox('Reference fitting',self)
         grid.addWidget(self.Rf_Check, 6, 0)
-        self.PNG_all = QCheckBox('all', self)
+        self.PNG_all = QCheckBox('All', self)
         grid.addWidget(self.PNG_all, 7, 0)
 
         self.PNG_all.stateChanged.connect(self.turnoff4)
         self.btn1 = QPushButton('Quit', self)
-        grid.addWidget(self.btn1, 8, 5)
+        grid.addWidget(self.btn1, 8, 6)
         self.btn1.resize(self.btn1.sizeHint())
         self.btn1.clicked.connect(QCoreApplication.instance().quit)
 
@@ -178,11 +179,6 @@ class MyApp(QWidget):
         grid.addWidget(self.btn2, 8, 1)
         self.btn2.resize(self.btn2.sizeHint())
         self.btn2.clicked.connect(self.test2)
-
-        self.btn5 = QPushButton('Check', self)
-        grid.addWidget(self.btn5, 8, 4)
-        self.btn5.resize(self.btn5.sizeHint())
-        self.btn5.clicked.connect(self.test)
 
         self.btn3 = QPushButton('Delete_png', self)
         grid.addWidget(self.btn3, 8, 2)
@@ -194,6 +190,15 @@ class MyApp(QWidget):
         self.btn4.resize(self.btn4.sizeHint())
         self.btn4.clicked.connect(self.test3)
 
+        self.btn5 = QPushButton('Check', self)
+        grid.addWidget(self.btn5, 8, 4)
+        self.btn5.resize(self.btn5.sizeHint())
+        self.btn5.clicked.connect(self.test)
+
+        self.btn6 = QPushButton('Search', self)
+        grid.addWidget(self.btn6, 8, 5)
+        self.btn6.resize(self.btn5.sizeHint())
+        self.btn6.clicked.connect(self.open_search)
 
         # creating a check-able combo box object
         self.combo_box_row = CheckableComboBox1_1(self)
@@ -207,10 +212,17 @@ class MyApp(QWidget):
         self.combo_box_row.addItems(geek_list_1_1)
         self.combo_box_column.addItems(geek_list_1_2)
         self.combobox_wafer.addItems(geek_list_2)
+
+    def open_search (self):
+        dlg = MyApp_search()
+        dlg.exec_()
+
     def test(self):
         print('Wafer : ' + str(checkedItems2) + ', ' + 'Row : ' + str(checkedItems1_1) + ', ' + 'Column : ' + str(checkedItems1_2))
+
     def test5(self):
         clear_png()
+
     def turnoff1(self):
         if self.Wafer_all.isChecked():
             self.combobox_wafer.setEnabled(False)
@@ -219,6 +231,7 @@ class MyApp(QWidget):
                 checkedItems2.append(geek_list_2[i])
         else:
             self.combobox_wafer.setEnabled(True)
+
     def turnoff2(self):
         if self.Col_all.isChecked():
             self.combo_box_column.setEnabled(False)
@@ -227,6 +240,7 @@ class MyApp(QWidget):
                 checkedItems1_2.append(geek_list_1_2[i])
         else:
             self.combo_box_column.setEnabled(True)
+
     def turnoff3(self):
         if self.Row_all.isChecked():
             self.combo_box_row.setEnabled(False)
@@ -253,7 +267,7 @@ class MyApp(QWidget):
         make_xlsx()
 
     def test2(self):
-
+        clear_png()
         # print('Wafer : ' + str(checkedItems2) + ', ' + 'Row : ' + str(checkedItems1_1) + ', ' + 'Column : ' + str(checkedItems1_2))
         # a = []
         # for x in checkedItems2:
@@ -274,6 +288,11 @@ class MyApp(QWidget):
                 for i in range(0, len(all_LMZ)):
                     if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                         plot.plot(all_LMZ[i])
+                        plt.suptitle('Analysis_{}_({},{})_{}_{}'.format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                            TestSiteInfo(all_LMZ[i], "DieRow"),
+                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                            Date(all_LMZ[i])))
                         plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}.png"
                                     .format(TestSiteInfo(all_LMZ[i], "Wafer"),
                                             TestSiteInfo(all_LMZ[i], "DieRow"),
