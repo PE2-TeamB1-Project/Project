@@ -1,11 +1,10 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QCoreApplication, Qt
 import iv
 import reference
 import transmission_measured as tm
 import transmission_processed as tp
-from filter import *
+import matplotlib.pyplot as plt
 from get_result import *
 import plot
 
@@ -20,78 +19,82 @@ class MyApp_search(QDialog):
         self.setWindowTitle('search image')
         self.move(300,300)
         self.resize(380,400)
+        grid = QGridLayout()
+        self.setLayout(grid)
 
-        Wafer_label = QLabel('Wafer',self)
-        Wafer_label.move(30, 50)
-        self.Wafer = QComboBox(self)
-        self.Wafer.addItem('D07'), \
-        self.Wafer.addItem('D08'), \
-        self.Wafer.addItem('D23'), \
-        self.Wafer.addItem('D24'), \
-        self.Wafer.move(30, 80)
-        # Wafer_D07 = QCheckBox('D07',self)
-        # Wafer_D07.move(30,80)
-        # Wafer_D08 = QCheckBox('D08',self)
-        # Wafer_D08.move(100,80)
-        # Wafer_D23 = QCheckBox('D23',self)
-        # Wafer_D23.move(170,80)
-        # Wafer_D24 = QCheckBox('D24',self)
-        # Wafer_D24.move(240,80)
+        self.Wafer_label = QLabel('Wafer',self)
+        grid.addWidget(self.Wafer_label, 0, 0)
+        self.Wafer_box = QComboBox(self)
+        self.Wafer_box.addItem('D07'), \
+        self.Wafer_box.addItem('D08'), \
+        self.Wafer_box.addItem('D23'), \
+        self.Wafer_box.addItem('D24'), \
+        grid.addWidget(self.Wafer_box, 0, 1)
 
-        Row_label = QLabel('Row : ',self)
-        Row_label.move(30, 130)
-        self.Row = QComboBox(self)
-        self.Row.addItem('-4'), \
-        self.Row.addItem('-3'), \
-        self.Row.addItem('-2'), \
-        self.Row.addItem('-1'), \
-        self.Row.addItem('0'), \
-        self.Row.addItem('1'), \
-        self.Row.addItem('2'), \
-        self.Row.addItem('3'), \
-        self.Row.move(80,130)
+        self.Row_label = QLabel('Row : ',self)
+        grid.addWidget(self.Row_label, 1, 0)
+        self.Row_box = QComboBox(self)
+        self.Row_box.addItem('-4'), \
+        self.Row_box.addItem('-3'), \
+        self.Row_box.addItem('-2'), \
+        self.Row_box.addItem('-1'), \
+        self.Row_box.addItem('0'), \
+        self.Row_box.addItem('1'), \
+        self.Row_box.addItem('2'), \
+        self.Row_box.addItem('3'), \
+        grid.addWidget(self.Row_box, 1, 1)
 
-        Col_label = QLabel('Column : ',self)
-        Col_label.move(180, 130)
-        self.Col = QComboBox(self)
-        self.Col.addItem('-4'), \
-        self.Col.addItem('-3'), \
-        self.Col.addItem('-2'), \
-        self.Col.addItem('-1'), \
-        self.Col.addItem('0'), \
-        self.Col.addItem('1'), \
-        self.Col.addItem('2'), \
-        self.Col.addItem('3'), \
-        self.Col.move(250,130)
+        self.Col_label = QLabel('Column : ',self)
+        grid.addWidget(self.Col_label, 1, 2)
+        self.Col_box = QComboBox(self)
+        self.Col_box.addItem('-4'), \
+        self.Col_box.addItem('-3'), \
+        self.Col_box.addItem('-2'), \
+        self.Col_box.addItem('-1'), \
+        self.Col_box.addItem('0'), \
+        self.Col_box.addItem('1'), \
+        self.Col_box.addItem('2'), \
+        self.Col_box.addItem('3'), \
+        grid.addWidget(self.Col_box, 1, 3)
 
         self.IV_Check = QCheckBox('IV_graph(fitting)',self)
-        self.IV_Check.move(30,180)
+        grid.addWidget(self.IV_Check, 2, 0)
         self.Ts1_Check = QCheckBox('Transmission spectra(measured)',self)
-        self.Ts1_Check.move(30, 210)
+        grid.addWidget(self.Ts1_Check, 3, 0)
         self.Ts2_Check = QCheckBox('Transmission spectra(processed)',self)
-        self.Ts2_Check.move(30,240)
+        grid.addWidget(self.Ts2_Check, 4, 0)
         self.Rf_Check = QCheckBox('Reference fitting',self)
-        self.Rf_Check.move(30,270)
+        grid.addWidget(self.Rf_Check, 5, 0)
         self.all_Check = QCheckBox('all',self)
-        self.all_Check.move(30,300)
+        grid.addWidget(self.all_Check, 6, 0)
+
 
         self.btn1 = QPushButton('Show',self)
-        self.btn1.move(50,350)
+        grid.addWidget(self.btn1, 8, 0)
         self.btn1.clicked.connect(self.test2)
 
         self.btn2 = QPushButton('Check', self)
-        self.btn2.move(150, 350)
+        grid.addWidget(self.btn2, 8, 1)
         self.btn2.clicked.connect(self.test)
 
         self.all_Check.stateChanged.connect(self.turnoff4)
 
-    def test(self):
+        self.Wafer_check = QLabel('Wafer : ', self)
+        grid.addWidget(self.Wafer_check, 7, 0)
 
-        x = str(self.Col.currentText())
-        y = str(self.Row.currentText())
-        z = str(self.Wafer.currentText())
-        a=[z,y,x]
-        print(a)
+        self.Row_check = QLabel('Row : ', self)
+        grid.addWidget(self.Row_check, 7, 1)
+
+        self.Col_check = QLabel('Column : ', self)
+        grid.addWidget(self.Col_check, 7, 2)
+
+    def test(self):
+        x = str(self.Col_box.currentText())
+        y = str(self.Row_box.currentText())
+        z = str(self.Wafer_box.currentText())
+        self.Wafer_check.setText('Wafer : ' + z)
+        self.Row_check.setText('Row : ' + y)
+        self.Col_check.setText('Column : ' + x)
 
     def turnoff4(self):
         if self.all_Check.isChecked():
@@ -106,9 +109,9 @@ class MyApp_search(QDialog):
             self.Rf_Check.setEnabled(True)
 
     def test2(self):
-        x = str(self.Col.currentText())
-        y = str(self.Row.currentText())
-        z = str(self.Wafer.currentText())
+        x = str(self.Col_box.currentText())
+        y = str(self.Row_box.currentText())
+        z = str(self.Wafer_box.currentText())
         a = [z, y, x]
 
         if self.all_Check.isChecked() == True:
@@ -147,7 +150,3 @@ class MyApp_search(QDialog):
                     plt.show()
             # print(a, "Reference fitting")
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = MyApp_search()
-    sys.exit(app.exec_())

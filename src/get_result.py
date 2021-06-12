@@ -70,7 +70,7 @@ def make_xlsx ():
                    "Column",
                    "ErrorFlag",
                    "Error description",
-                   "Analysis Wavelengh",
+                   "Analysis Wavelength",
                    "Rsq of Ref.spectrum(6th)",
                    "Max transmission of Ref spec(dB)",
                    "Rsq of IV",

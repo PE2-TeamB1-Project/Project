@@ -143,16 +143,19 @@ class MyApp(QWidget):
         self.resize(400,400)
         grid = QGridLayout()
         self.setLayout(grid)
+
         self.Wafer_label = QLabel('Wafer',self)
         grid.addWidget(self.Wafer_label, 0, 0)
         self.Wafer_all = QCheckBox('전체', self)
         grid.addWidget(self.Wafer_all, 0, 1)
         self.Wafer_all.stateChanged.connect(self.turnoff1)
+
         self.Col_label = QLabel('Column : ',self)
         grid.addWidget(self.Col_label, 2, 3)
         self.Col_all = QCheckBox('전체', self)
         grid.addWidget(self.Col_all, 2, 4)
         self.Col_all.stateChanged.connect(self.turnoff2)
+
         self.Row_label = QLabel('Row : ', self)
         grid.addWidget(self.Row_label, 2, 0)
         self.Row_all = QCheckBox('전체', self)
@@ -196,6 +199,9 @@ class MyApp(QWidget):
         self.btn5.resize(self.btn5.sizeHint())
         self.btn5.clicked.connect(self.test)
 
+        self.label = QLabel('Wafer : \nRow : \n Column : ', self)
+        grid.addWidget(self.label, 8, 0)
+
         self.btn6 = QPushButton('Search', self)
         grid.addWidget(self.btn6, 8, 5)
         self.btn6.resize(self.btn5.sizeHint())
@@ -219,7 +225,7 @@ class MyApp(QWidget):
         self.urlLink = "<a href=\"http://github.com/PE2-TeamB1-Project/Project\">'Help'</a>"
         label = QLabel(self)
         label.setText(self.urlLink)
-        grid.addWidget(label, 7, 5)
+        grid.addWidget(label, 7, 6)
         label.setOpenExternalLinks(True)
 
     def open_search (self):
@@ -227,37 +233,45 @@ class MyApp(QWidget):
         dlg.exec_()
 
     def test(self):
-        print('Wafer : ' + str(checkedItems2) + ', ' + 'Row : ' + str(checkedItems1_1) + ', ' + 'Column : ' + str(checkedItems1_2))
+        x = str(checkedItems2)
+        y = str(checkedItems1_1)
+        z = str(checkedItems1_2)
+        self.label.setText('Wafer : ' + x[1:-1] +
+                           '\nRow : ' + y[1:-1] +
+                           '\nColumn : ' + z[1:-1])
 
     def test5(self):
         clear_png()
 
     def turnoff1(self):
+        checkedItems2.clear()
         if self.Wafer_all.isChecked():
             self.combobox_wafer.setEnabled(False)
-            checkedItems2.clear()
             for i in range(0, len(geek_list_2)):
                 checkedItems2.append(geek_list_2[i])
         else:
             self.combobox_wafer.setEnabled(True)
 
+
     def turnoff2(self):
+        checkedItems1_2.clear()
         if self.Col_all.isChecked():
             self.combo_box_column.setEnabled(False)
-            checkedItems1_2.clear()
             for i in range(0, len(geek_list_1_2)):
                 checkedItems1_2.append(geek_list_1_2[i])
         else:
             self.combo_box_column.setEnabled(True)
 
+
     def turnoff3(self):
+        checkedItems1_1.clear()
         if self.Row_all.isChecked():
             self.combo_box_row.setEnabled(False)
-            checkedItems1_1.clear()
             for i in range(0, len(geek_list_1_1)):
                 checkedItems1_1.append(geek_list_1_1[i])
         else:
             self.combo_box_row.setEnabled(True)
+
 
     def turnoff4(self):
         if self.PNG_all.isChecked():
