@@ -6,11 +6,9 @@ import i_one
 import i_none
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from filter import *
 import shutil
 import warnings
-import openpyxl
 warnings.filterwarnings('ignore')
 from png_signal import *
 
@@ -45,7 +43,7 @@ def make_xlsx ():
              fit.Rsq_fit(all_LMZ[i]),
              i_none.negative1(all_LMZ[i]),
              i_one.positive1(all_LMZ[i])]
-        if len(file_list) > 0:
+        if len(file_list) == 98:
             a.append('=HYPERLINK("../png_files/Analysis_{0}_({1},{2})_{3}_{4}.png","show '
                      'png")'.format(
                 TestSiteInfo(all_LMZ[i], "Wafer"),

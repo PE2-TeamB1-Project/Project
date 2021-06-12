@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QHBoxLayout, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QTextEdit, QComboBox
+from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QCoreApplication, Qt
 import iv
@@ -136,6 +136,7 @@ class MyApp(QWidget):
         super().__init__()
         self.initUI()
         self.show()
+
     def initUI(self):
         self.setWindowTitle('project_B1_save')
         self.move(300,300)
@@ -204,14 +205,22 @@ class MyApp(QWidget):
         self.combo_box_row = CheckableComboBox1_1(self)
         self.combo_box_column = CheckableComboBox1_2(self)
         self.combobox_wafer = CheckableComboBox2(self)
+
         # setting geometry of combo box
         grid.addWidget(self.combo_box_row, 2, 2)
         grid.addWidget(self.combo_box_column, 2, 5)
         grid.addWidget(self.combobox_wafer, 0, 2)
+
         # adding list of items to combo box
         self.combo_box_row.addItems(geek_list_1_1)
         self.combo_box_column.addItems(geek_list_1_2)
         self.combobox_wafer.addItems(geek_list_2)
+
+        self.urlLink = "<a href=\"http://github.com/PE2-TeamB1-Project/Project\">'Help'</a>"
+        label = QLabel(self)
+        label.setText(self.urlLink)
+        grid.addWidget(label, 7, 5)
+        label.setOpenExternalLinks(True)
 
     def open_search (self):
         dlg = MyApp_search()
@@ -268,15 +277,6 @@ class MyApp(QWidget):
 
     def test2(self):
         clear_png()
-        # print('Wafer : ' + str(checkedItems2) + ', ' + 'Row : ' + str(checkedItems1_1) + ', ' + 'Column : ' + str(checkedItems1_2))
-        # a = []
-        # for x in checkedItems2:
-        #     for y in checkedItems1_1:
-        #         for z in checkedItems1_2:
-        #             a.append([x, y, z])
-        # print(a)
-        # for w in a:
-        #     print(w)
 
         if self.PNG_all.isChecked() == True:
             a = []
@@ -300,7 +300,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            # print(a, "all")
+
         if self.IV_Check.isChecked() == True:
             b = []
             for x in checkedItems2:
@@ -318,7 +318,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            # print(b, "IV_graph(fitting)")
+
         if self.Ts1_Check.isChecked() == True:
             c = []
             for x in checkedItems2:
@@ -336,7 +336,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            # print(c, "Transmission spectra(measured)")
+
         if self.Ts2_Check.isChecked() == True:
             d = []
             for x in checkedItems2:
@@ -354,7 +354,7 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            # print(d, "Transmission spectra(processed)")
+
         if self.Rf_Check.isChecked() == True:
             e = []
             for x in checkedItems2:
@@ -372,4 +372,3 @@ class MyApp(QWidget):
                                             TestSiteInfo(all_LMZ[i], 'TestSite'),
                                             Date(all_LMZ[i])))
                         plt.close()
-            # print(e, "Reference fitting")

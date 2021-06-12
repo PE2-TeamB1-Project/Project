@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
 from fitting import *
-from filter import *
 
 def plot(x):
     tree = ET.parse(x)
