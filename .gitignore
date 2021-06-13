@@ -1,7 +1,7 @@
 ## Ignore file##
 .idea/
 __pycache__/
-data/D07/
-data/D08/
-data/D23/
-data/D24/
+/D07
+/D08
+/D23
+/D24
