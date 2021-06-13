@@ -1,4 +1,6 @@
-from filter_2 import *
+import sys
+sys.path.append('./src')
+from selection import *
 
 while True:
     if __name__ == '__main__':

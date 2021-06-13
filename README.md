@@ -1,29 +1,40 @@
-# <u>manual</u>
+# B1_Project
 
-## __Introduction__
+## Index
+[Overview](#Overview)   
+[Install](#Install)  
+[Environment](#Environment)  
+[Enquiry](#Enquiry)  
 
-+ The Program Engineering 2 : Team Project to make analysis package to show graphs and Dataframe.
+***
 
-## Objective of project
+## Introduction
+This tool is analysis package to store analyzed Dataframe and graphs and to show them from xml data customer give.  
+1. It consist of "run" / "run_show"   
+2. run : store the files in Local Repository  
+   run_show : detailed search image  
 
-Analysing the data in xml files and show the contents to <u>csv file</u> and <u>graphs plotting data</u>(_I-V graph, transmission-wavelength graph_)
+## Contributor           
+* Kim kang-seok         ddol410@hanyang.ac.kr  
+* Song jun-su           sb020578@hanyang.ac.kr  
+* Choi il-gyu           dlfrb789@hanyang.ac.kr   
+## Usage
+1. **plot** : downloading whether to 
+2. **Delete_png** :
+3. **xlsx** :
+4. **Check** :
+5. **Search** :
+6. **Quit** : 
+<img src="./doc/B1_4.jpg" width="400">  
 
 ## Install
+ ```{.python}
+pip install -r requirements.txt
+ ```
 
-``` 
-$ pip install -r requirements.txt
-```
+## Environment
+* Python 3.8
+* Window 10
 
-## Example of analysis Result
-+ Merged image(Transmission spectra graph(as measured) & Reference fitting & flat Transmission spectra & IV-fitting)
-<img src="./doc/B1_1.png" width="400">
-
-+ stored Pictures of the merged image
-<img src="./doc/B1_2.png" width="400">
-
-+ analysis contents dataframe by xml data
-<img src="./doc/B1_3.png" width="400">
-
-## run.py: the last move button
-
-python script
+## Enquiry
+Please press the 'help' link in window and ask one of us using email.

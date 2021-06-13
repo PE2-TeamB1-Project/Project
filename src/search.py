@@ -45,7 +45,7 @@ class MyApp_search(QDialog):
         grid.addWidget(self.Row_box, 1, 1)
 
         self.Col_label = QLabel('Column : ',self)
-        grid.addWidget(self.Col_label, 1, 2)
+        grid.addWidget(self.Col_label, 2, 0)
         self.Col_box = QComboBox(self)
         self.Col_box.addItem('-4'), \
         self.Col_box.addItem('-3'), \
@@ -55,38 +55,38 @@ class MyApp_search(QDialog):
         self.Col_box.addItem('1'), \
         self.Col_box.addItem('2'), \
         self.Col_box.addItem('3'), \
-        grid.addWidget(self.Col_box, 1, 3)
+        grid.addWidget(self.Col_box, 2, 1)
 
         self.IV_Check = QCheckBox('IV_graph(fitting)',self)
-        grid.addWidget(self.IV_Check, 2, 0)
+        grid.addWidget(self.IV_Check, 3, 0)
         self.Ts1_Check = QCheckBox('Transmission spectra(measured)',self)
-        grid.addWidget(self.Ts1_Check, 3, 0)
+        grid.addWidget(self.Ts1_Check, 4, 0)
         self.Ts2_Check = QCheckBox('Transmission spectra(processed)',self)
-        grid.addWidget(self.Ts2_Check, 4, 0)
+        grid.addWidget(self.Ts2_Check, 5, 0)
         self.Rf_Check = QCheckBox('Reference fitting',self)
-        grid.addWidget(self.Rf_Check, 5, 0)
+        grid.addWidget(self.Rf_Check, 6, 0)
         self.all_Check = QCheckBox('all',self)
-        grid.addWidget(self.all_Check, 6, 0)
+        grid.addWidget(self.all_Check, 7, 0)
 
 
         self.btn1 = QPushButton('Show',self)
-        grid.addWidget(self.btn1, 8, 0)
+        grid.addWidget(self.btn1, 9, 0)
         self.btn1.clicked.connect(self.test2)
 
         self.btn2 = QPushButton('Check', self)
-        grid.addWidget(self.btn2, 8, 1)
+        grid.addWidget(self.btn2, 9, 1)
         self.btn2.clicked.connect(self.test)
 
         self.all_Check.stateChanged.connect(self.turnoff4)
 
         self.Wafer_check = QLabel('Wafer : ', self)
-        grid.addWidget(self.Wafer_check, 7, 0)
+        grid.addWidget(self.Wafer_check, 8, 0)
 
         self.Row_check = QLabel('Row : ', self)
-        grid.addWidget(self.Row_check, 7, 1)
+        grid.addWidget(self.Row_check, 8, 1)
 
         self.Col_check = QLabel('Column : ', self)
-        grid.addWidget(self.Col_check, 7, 2)
+        grid.addWidget(self.Col_check, 8, 2)
 
     def test(self):
         x = str(self.Col_box.currentText())

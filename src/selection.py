@@ -290,99 +290,101 @@ class MyApp(QWidget):
         make_xlsx()
 
     def test2(self):
-        clear_png()
+        if self.PNG_all.isChecked() == False and self.IV_Check.isChecked() == False and self.Ts1_Check.isChecked() == False and self.Ts2_Check.isChecked()== False and self.Rf_Check.isChecked() == False:
+            pass
+        else:
+            clear_png()
+            if self.PNG_all.isChecked() == True:
+                a = []
+                for x in checkedItems2:
+                    for y in checkedItems1_1:
+                        for z in checkedItems1_2:
+                            a.append([x, y, z])
+                for w in a:
+                    for i in range(0, len(all_LMZ)):
+                        if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
+                            plot.plot(all_LMZ[i])
+                            plt.suptitle('Analysis_{}_({},{})_{}_{}'.format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}.png"
+                                        .format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.close()
 
-        if self.PNG_all.isChecked() == True:
-            a = []
-            for x in checkedItems2:
-                for y in checkedItems1_1:
-                    for z in checkedItems1_2:
-                        a.append([x, y, z])
-            for w in a:
-                for i in range(0, len(all_LMZ)):
-                    if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
-                        plot.plot(all_LMZ[i])
-                        plt.suptitle('Analysis_{}_({},{})_{}_{}'.format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}.png"
-                                    .format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.close()
+            if self.IV_Check.isChecked() == True:
+                b = []
+                for x in checkedItems2:
+                    for y in checkedItems1_1:
+                        for z in checkedItems1_2:
+                            b.append([x, y, z])
+                for w in b:
+                    for i in range(0, len(all_LMZ)):
+                        if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
+                            iv.iv(all_LMZ[i])
+                            plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_iv.png"
+                                        .format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.close()
 
-        if self.IV_Check.isChecked() == True:
-            b = []
-            for x in checkedItems2:
-                for y in checkedItems1_1:
-                    for z in checkedItems1_2:
-                        b.append([x, y, z])
-            for w in b:
-                for i in range(0, len(all_LMZ)):
-                    if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
-                        iv.iv(all_LMZ[i])
-                        plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_iv.png"
-                                    .format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.close()
+            if self.Ts1_Check.isChecked() == True:
+                c = []
+                for x in checkedItems2:
+                    for y in checkedItems1_1:
+                        for z in checkedItems1_2:
+                            c.append([x, y, z])
+                for w in c:
+                    for i in range(0, len(all_LMZ)):
+                        if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
+                            tm.measured(all_LMZ[i])
+                            plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_measured.png"
+                                        .format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.close()
 
-        if self.Ts1_Check.isChecked() == True:
-            c = []
-            for x in checkedItems2:
-                for y in checkedItems1_1:
-                    for z in checkedItems1_2:
-                        c.append([x, y, z])
-            for w in c:
-                for i in range(0, len(all_LMZ)):
-                    if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
-                        tm.measured(all_LMZ[i])
-                        plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_measured.png"
-                                    .format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.close()
+            if self.Ts2_Check.isChecked() == True:
+                d = []
+                for x in checkedItems2:
+                    for y in checkedItems1_1:
+                        for z in checkedItems1_2:
+                            d.append([x, y, z])
+                for w in d:
+                    for i in range(0, len(all_LMZ)):
+                        if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
+                            tp.processed(all_LMZ[i])
+                            plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_processed.png"
+                                        .format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.close()
 
-        if self.Ts2_Check.isChecked() == True:
-            d = []
-            for x in checkedItems2:
-                for y in checkedItems1_1:
-                    for z in checkedItems1_2:
-                        d.append([x, y, z])
-            for w in d:
-                for i in range(0, len(all_LMZ)):
-                    if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
-                        tp.processed(all_LMZ[i])
-                        plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_processed.png"
-                                    .format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.close()
-
-        if self.Rf_Check.isChecked() == True:
-            e = []
-            for x in checkedItems2:
-                for y in checkedItems1_1:
-                    for z in checkedItems1_2:
-                        e.append([x, y, z])
-            for w in e:
-                for i in range(0, len(all_LMZ)):
-                    if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
-                        reference.reference(all_LMZ[i])
-                        plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_reference.png"
-                                    .format(TestSiteInfo(all_LMZ[i], "Wafer"),
-                                            TestSiteInfo(all_LMZ[i], "DieRow"),
-                                            TestSiteInfo(all_LMZ[i], "DieColumn"),
-                                            TestSiteInfo(all_LMZ[i], 'TestSite'),
-                                            Date(all_LMZ[i])))
-                        plt.close()
+            if self.Rf_Check.isChecked() == True:
+                e = []
+                for x in checkedItems2:
+                    for y in checkedItems1_1:
+                        for z in checkedItems1_2:
+                            e.append([x, y, z])
+                for w in e:
+                    for i in range(0, len(all_LMZ)):
+                        if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
+                            reference.reference(all_LMZ[i])
+                            plt.savefig("./results/png_files/Analysis_{}_({},{})_{}_{}_reference.png"
+                                        .format(TestSiteInfo(all_LMZ[i], "Wafer"),
+                                                TestSiteInfo(all_LMZ[i], "DieRow"),
+                                                TestSiteInfo(all_LMZ[i], "DieColumn"),
+                                                TestSiteInfo(all_LMZ[i], 'TestSite'),
+                                                Date(all_LMZ[i])))
+                            plt.close()
