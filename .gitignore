@@ -1,7 +1,4 @@
 ## Ignore file##
 .idea/
 __pycache__/
-/D07
-/D08
-/D23
-/D24
+data/**/*.xml
