@@ -11,6 +11,8 @@ import plot
 import matplotlib.pyplot as plt
 from filter import *
 from search import MyApp_search
+import time
+from tqdm import tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -300,7 +302,7 @@ class MyApp(QWidget):
                     for y in checkedItems1_1:
                         for z in checkedItems1_2:
                             a.append([x, y, z])
-                for w in a:
+                for w in tqdm(a):
                     for i in range(0, len(all_LMZ)):
                         if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                             plot.plot(all_LMZ[i])
@@ -316,6 +318,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
+                    time.sleep(0.1)
 
             if self.IV_Check.isChecked() == True:
                 b = []
@@ -323,7 +326,7 @@ class MyApp(QWidget):
                     for y in checkedItems1_1:
                         for z in checkedItems1_2:
                             b.append([x, y, z])
-                for w in b:
+                for w in tqdm(b):
                     for i in range(0, len(all_LMZ)):
                         if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                             iv.iv(all_LMZ[i])
@@ -334,6 +337,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
+                    time.sleep(0.1)
 
             if self.Ts1_Check.isChecked() == True:
                 c = []
@@ -341,7 +345,7 @@ class MyApp(QWidget):
                     for y in checkedItems1_1:
                         for z in checkedItems1_2:
                             c.append([x, y, z])
-                for w in c:
+                for w in tqdm(c):
                     for i in range(0, len(all_LMZ)):
                         if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                             tm.measured(all_LMZ[i])
@@ -352,6 +356,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
+                    time.sleep(0.1)
 
             if self.Ts2_Check.isChecked() == True:
                 d = []
@@ -359,7 +364,7 @@ class MyApp(QWidget):
                     for y in checkedItems1_1:
                         for z in checkedItems1_2:
                             d.append([x, y, z])
-                for w in d:
+                for w in tqdm(d):
                     for i in range(0, len(all_LMZ)):
                         if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                             tp.processed(all_LMZ[i])
@@ -370,6 +375,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
+                    time.sleep(0.1)
 
             if self.Rf_Check.isChecked() == True:
                 e = []
@@ -377,7 +383,7 @@ class MyApp(QWidget):
                     for y in checkedItems1_1:
                         for z in checkedItems1_2:
                             e.append([x, y, z])
-                for w in e:
+                for w in tqdm(e):
                     for i in range(0, len(all_LMZ)):
                         if TestSiteInfo(all_LMZ[i], "Wafer") == w[0] and TestSiteInfo(all_LMZ[i], "DieRow") == w[1] and TestSiteInfo(all_LMZ[i], "DieColumn") == w[2]:
                             reference.reference(all_LMZ[i])
@@ -388,3 +394,4 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
+                    time.sleep(0.1)
