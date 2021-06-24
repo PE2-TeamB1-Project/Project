@@ -318,7 +318,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
-                    time.sleep(0.1)
+                time.sleep(0.1)
 
             if self.IV_Check.isChecked() == True:
                 b = []
@@ -337,7 +337,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
-                    time.sleep(0.1)
+                time.sleep(0.1)
 
             if self.Ts1_Check.isChecked() == True:
                 c = []
@@ -356,7 +356,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
-                    time.sleep(0.1)
+                time.sleep(0.1)
 
             if self.Ts2_Check.isChecked() == True:
                 d = []
@@ -375,7 +375,7 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
-                    time.sleep(0.1)
+                time.sleep(0.1)
 
             if self.Rf_Check.isChecked() == True:
                 e = []
@@ -394,4 +394,4 @@ class MyApp(QWidget):
                                                 TestSiteInfo(all_LMZ[i], 'TestSite'),
                                                 Date(all_LMZ[i])))
                             plt.close()
-                    time.sleep(0.1)
+                time.sleep(0.1)
